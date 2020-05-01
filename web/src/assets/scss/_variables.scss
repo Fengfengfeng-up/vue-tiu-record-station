@@ -1,0 +1,94 @@
+// 放所有变量
+// colorstopbarl
+$colors: (
+  "primary": #db9e3f,
+  "info": #464f73,
+  "danger": #791a15,
+  "red-1": #cc0000,
+  "blue-1": #1f3695,
+  "blue": #4394e4,
+  "white": #fff,
+  "white-1": #fcfcfc,
+  "white-2": #eceef0,
+  "white-3": #f1f1f1,
+  "light": #f9f9f9,
+  "light-1": #d4d9de,
+  "light-2": #e9edf4,
+  "grey": #999,
+  "grey-1": #666,
+  "grey-2": #7a7a80,
+  "grey-3": #ebebeb,
+  "dark-1": #343440,
+  "dark-3": #333,
+  "dark": #222,
+  "black-9": rgba(0, 0, 0, .502),
+  "black-2": #181818,
+  "black-1": #111,
+  "black": #000
+);
+$border-color: map-get($colors, "light-2");
+// font size
+$base-font-size: 1rem; // 基础字体大小
+$font-sizes: (
+  xxs: 0.615385,
+  xs: 0.769231,
+  // 10px
+    sm: 0.923077,
+  // 12px
+    md: 1,
+  // 13px
+    lg: 1.076923,
+  // 14px
+    lgl: 1.153846,
+    xl: 1.230769, // 16px
+    xxl: 1.384615, // 18px
+    xxxl: 1.538462,
+    xxxxl: 1.8
+);
+
+// 主轴的排列样式
+$flex-jc: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  between: space-between,
+  around: space-around,
+  evenly: space-evenly,
+);
+
+// 交叉轴的排列样式
+$flex-ai: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  stretch: stretch
+);
+
+// 边距
+// 0-5
+// .mt-1 => margin-top 1级
+$spacing-types: (
+  m: margin,
+  p: padding
+);
+$spacing-directions: (
+  t: top,
+  r: right,
+  l: left,
+  b: bottom
+);
+$spacing-base-size: 1rem; // 基础间距单位
+$spacing-sizes: (
+  0: 0,
+  1: 0.25,
+  2: 0.5,
+  3: 1,
+  4: 1.5,
+  4a: 2,
+  5: 3,
+  6: 4,
+  8: 6
+);
+
+
+

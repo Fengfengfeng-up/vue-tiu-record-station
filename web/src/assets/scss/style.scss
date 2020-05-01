@@ -1,0 +1,348 @@
+@import "./variables";
+// reset
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
+html {
+  font-size: 13px; // 基础字体大小
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.2em;
+  background: #f1f1f1;
+  -webkit-font-smoothing: antialiased; // 字体平滑
+}
+
+a {
+  color: #999;
+  text-decoration: none;
+}
+
+p {
+  line-height: 1.5em;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+@each $colorKey, $color in $colors {
+  .text-#{$colorKey} {
+    color: $color;
+  }
+  .bg-#{$colorKey} {
+    background-color: $color;
+  }
+}
+
+// text align
+@each $var in (left, center, right) {
+  .text-#{$var} {
+    text-align: $var !important;
+  }
+}
+
+@each $sizeKey, $size in $font-sizes {
+  .fs-#{$sizeKey} {
+    font-size: $base-font-size * $size !important;
+  }
+}
+
+// text hidden 文字溢出本行隐藏显示 ...
+.text-ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 多行文本超过3行溢出显示...
+.text-ellipsis-3 {
+  line-height: 1.6rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+// width, height
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+// flex
+.d-flex {
+  display: flex;
+}
+// 切换主轴方向
+.flex-column {
+  flex-direction: column;
+}
+
+// 换行
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+@each $key, $value in $flex-jc {
+  .jc-#{$key} {
+    justify-content: $value;
+  }
+}
+
+@each $key, $value in $flex-ai {
+  .ai-#{$key} {
+    align-items: $value;
+  }
+}
+
+.flex-1 {
+  flex: 1; // shrink:1 grow:1
+}
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+// m-0, mx-0
+@each $typeKey, $type in $spacing-types {
+  //.m-1 四周间距
+  @each $sizeKey, $size in $spacing-sizes {
+    // .mt-1 { margin-top: 0.25rem; }
+    .#{$typeKey}-#{$sizeKey} {
+      #{$type}: $size * $spacing-base-size;
+    }
+  }
+  // .mx-1 水平间距
+  @each $sizeKey, $size in $spacing-sizes {
+    .#{$typeKey}x-#{$sizeKey} {
+      #{$type}-left: $size * $spacing-base-size;
+      #{$type}-right: $size * $spacing-base-size;
+    }
+  }
+  // .my-1 垂直间距
+  @each $sizeKey, $size in $spacing-sizes {
+    .#{$typeKey}y-#{$sizeKey} {
+      #{$type}-top: $size * $spacing-base-size;
+      #{$type}-bottom: $size * $spacing-base-size;
+    }
+  }
+  // .mt-1 单个方向边距
+  @each $directionKey, $direction in $spacing-directions {
+    @each $sizeKey, $size in $spacing-sizes {
+      // .mt-1 { margin-top: 0.25rem; }
+      .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+        #{$type}-#{$direction}: $size * $spacing-base-size;
+      }
+    }
+  }
+
+  .#{$typeKey} {
+    #{$type}: 0;
+  }
+}
+
+// nav
+.nav-wrap {
+  position: absolute;
+  width: 80%;
+  height: 100vh;
+  right: -100%;
+  top: 4.230769rem;
+  z-index: 500;
+  overflow: hidden;
+  transition: all 0.3s;
+  display: none;
+
+  &.show {
+    right: 0;
+    display: block;
+  }
+  &.killed {
+    display: none;
+  }
+  .nav {
+    width: 100%;
+    transition: all 0.5s;
+
+    &.show {
+      transform: translateX(-100%);
+    }
+  }
+
+  .nav-list {
+    min-width: 100%;
+    padding: 0;
+    margin: 0;
+
+    li {
+      line-height: 4.5rem;
+      background: inherit;
+      border-bottom: 1px solid map-get($colors, "white");
+      position: relative;
+
+      &.on::before {
+        display: inline-block;
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0.5rem;
+        height: 5rem;
+        background: map-get($colors, "danger");
+      }
+
+      .icon-zhuye1 {
+        font-size: 1.923077rem;
+        font-weight: normal;
+      }
+
+      .nav-item {
+        font-weight: 550;
+        justify-content: space-between;
+        position: relative;
+        transition: all 0.3s;
+
+        &.child:active {
+          background: rgba(0, 0, 0, 0.05);
+        }
+
+        &.child {
+          font-weight: normal;
+        }
+
+        #back,
+        #choose {
+          margin-right: 0.3rem;
+        }
+      }
+    }
+  }
+
+  .nav-list-images {
+    min-width: 100%;
+    transition: all 0.5s;
+
+    &.show_next {
+      transform: translateX(-100%);
+    }
+  }
+}
+
+// cover
+.cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background: rgba(0, 0, 0, .4);
+  z-index: 200;
+}
+
+// swiper
+.swiper {
+  .motto {
+    font-weight: normal;
+    line-height: 6rem;
+    font-size: 2.307692rem;
+  }
+  .swiper-inner {
+    .photo {
+      height: 18.8rem;
+      &.lasted {
+        height: 22rem;
+      }
+    }
+    .desc {
+      line-height: 2.2rem;
+      height: 6.8rem;
+      overflow: hidden;
+    }
+  }
+}
+
+// 点赞爱心
+.picked {
+  color: map-get($colors, "red-1");
+}
+
+// 留言背景
+$commentsBgColors: (
+  "0": map-get($colors, "info"),
+  "1": map-get($colors, "danger"),
+  "2": map-get($colors, "primary"),
+  "3": map-get($colors, "blue-1"),
+  "4": map-get($colors, "dark-1")
+);
+
+@each $key, $value in $commentsBgColors {
+  .bg-comment-#{$key} {
+    background-color: $value;
+  }
+}
+
+// 图集背景
+$PhotoBgColors: (
+  "people": map-get($colors, "black"),
+  "animal": map-get($colors, "black-1"),
+  "black_white": map-get($colors, "black-2"),
+  "view": map-get($colors, "black-1"),
+  "others": map-get($colors, "black")
+);
+
+@each $key, $value in $PhotoBgColors {
+  .bg-photos-#{$key} {
+    background-color: $value;
+  }
+}
+
+//
+.get-more {
+  .line {
+    width: 3rem;
+  }
+}
+
+// borders
+@each $dir in (top, right, bottom, left) {
+  .border-#{$dir} {
+    border-#{$dir}: 1px solid $border-color;
+  }
+}
+
+// video-number-color
+/* .video-number-color {
+  color: map-get($colors, "grey-2");
+} */
+
+// video-icon
+/* .video {
+  position: relative;
+  display: block;
+  .video-start {
+    background: url(../images/video-img.png) no-repeat;
+    background-size: contain;
+    display: inline-block;
+    width: 2.6rem;
+    height: 2.6rem;
+    position: absolute;
+    top: 1.5rem;
+    left: 3.5rem;
+  }
+}
+.video-icon {
+  background: url(../images/video-fre.png) no-repeat;
+  display: inline-block;
+  background-size: contain;
+  width: 1rem;
+  height: 1rem;
+} */
